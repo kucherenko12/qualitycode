@@ -57,19 +57,16 @@ public class Assignment
     private void generateSmP(AsiignmemtType asiignmemtType, TaskGraph taskGraph, Queue queue, SystemGraph systemGraph)
     {
         Random random = new Random();
-        //int time = 0;
         // перебираємо значення черги!! может, лучше пербирать время? перебор времени более стабильній
         // Модифікація
         // Черга збиває місця попередників, і виходять завдання, попердники яких ще не виконалися.
         // Тому у головному циклі вибираємо з черги перше завдання, яке виконалося
-        //for (int idInQueue = 0; idInQueue < queue.queue.length; idInQueue++)
         for (int taskNumber = 0; taskNumber < queue.queue.length; taskNumber++)
         {
             //SupportV4PrintMatrix.printMatrix(taskGraph.connectionsWeight);
 
             Integer thisTaskId = null;
             Integer idInQueue = null;
-            //boolean settledForThisTask = false;
 
             for (int checkedIdInQueue = 0; checkedIdInQueue < queue.queue.length; checkedIdInQueue++)
             {
@@ -93,7 +90,6 @@ public class Assignment
                     }
                 }
             }
-            //int thisTaskId = queue.queue[idInQueue];
 
             // Визначаємо завдання-попередники і записуємо їх номер до predcessorTasksIds
             List<Integer> predcessorTasksIds = new ArrayList<>();
@@ -108,7 +104,6 @@ public class Assignment
             int selectedProcessorId = 0;
             int assignmentTime;
 
-            //boolean predcessorsPresent= false;
             if (predcessorTasksIds.size() > 0)
             {
                 // AT LEAST ONE PREDCESSOR
@@ -162,7 +157,6 @@ public class Assignment
 
                     // Визначаємо процесор, який зберігає якнайбільше необхідних даних -------------------------
                     //// Разом з цим визначаємо процесори, на яких викнувалися завдання-попередники
-                    ////List<Integer> IdsOfprocessorsWithPredcessorsTaks = new ArrayList<>();
                     // Рахуємо кількість даних в процесорах
                     int[] dataInProcessors = new int[systemGraph.size];
                     for (int id : predcessorTasksIds)
@@ -187,14 +181,6 @@ public class Assignment
                             maxData = dataInProcessors[processorId];
                         }
                     }
-                    //// Визначаємо процесори, на яких виконувалися завдання-попередники
-                    ////for (int processorId = 0; processorId < systemGraph.size; processorId++)
-                    ////{
-                    ////    if(dataInProcessors[processorId] > 0)
-                    ////    {
-                    ////        IdsOfprocessorsWithPredcessorsTaks.add(processorId);
-                    ////    }
-                    ////}
 
 
                     // Серед процесорів з найбільшою кількістю даних
@@ -262,7 +248,6 @@ public class Assignment
                 int lastestOperationEnd = 0;
                 int firstAvaliableAssignmentTime = Integer.MAX_VALUE;
                 for (int i = 0; i < predcessorTasksIds.size(); i++)
-                /////////for (int processorId: IdsOfprocessorsWithPredcessorsTaks)
                 {
                     int predcessorTaskId = predcessorTasksIds.get(i);
                     // Для задач, выполененных на этом процессоре пересылка не надо - их результат записан в кэше процессора
